@@ -3,22 +3,15 @@ package org.example;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class Util {
-    public static void printProductMap(Map<String, Integer> productMap) {
-        int index = 1;
-        for (Map.Entry<String, Integer> entry : productMap.entrySet()) {
-            System.out.println(index + ") " + entry.getKey() + ", " + entry.getValue() + " kg");
-            index++;
-        }
-    }
-
-    public static void printContactMap(LinkedHashMap<String, String> contactMap) {
-        int index = 1;
-        for (Map.Entry<String, String> entry : contactMap.entrySet()) {
-            System.out.println(index + ") " + entry.getKey() + " - " + entry.getValue());
-            index++;
-        }
+    public static <K, V> void printMap(Map<K, V> map, String task) {
+        AtomicInteger index = new AtomicInteger(1);
+        boolean b = task.equals("3");
+        map.entrySet().stream()
+                .map(entry -> index + ") " + entry.getKey() + (b ? " - " : ", ") + entry.getValue() + (b ? "" : " kg"))
+                .forEach(System.out::println);
     }
 
     public static void updateProductMap(Map<String, Integer> productMap) {
@@ -34,11 +27,7 @@ class Util {
 
     public static void searchAndPrintProduct(Map<String, Integer> productMap, String searchProduct) {
         Integer quantity = productMap.get(searchProduct);
-        if (quantity != null) {
-            System.out.println("Found: " + searchProduct + ", " + quantity + " kg");
-        } else {
-            System.out.println("Product not found: " + searchProduct);
-        }
+        System.out.println(quantity != null ? "Found: " + searchProduct + ", " + quantity + " kg" : "Product not found: " + searchProduct);
     }
 
     public static void updateContactMap(LinkedHashMap<String, String> contactMap) {

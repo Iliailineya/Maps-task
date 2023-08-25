@@ -15,16 +15,6 @@ class DataProvider {
         return products;
     }
 
-    public static Map<String, Integer> createRandomProductMap() {
-        Map<String, Integer> products = new HashMap<>();
-        products.put("orange", 12);
-        products.put("banana", 25);
-        products.put("lemon", 8);
-        products.put("pineapple", 13);
-        products.put("grape", 9);
-        return products;
-    }
-
     public static LinkedHashMap<String, String> createInitialContactMap() {
         LinkedHashMap<String, String> contacts = new LinkedHashMap<>();
         contacts.put("Tom", "tom@mail.com");
